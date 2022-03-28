@@ -10,18 +10,18 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from std_msgs.msg import Bool
 from math import pi
 
+from Wpnav.msg import WpnavAction
+from Wpnav.msg import WpnavResult
+from Wpnav.msg import WpnavFeedback
 
 # クラス
 class WpNavi():
-    def __init__(self):  # コンストラクタ
-        rospy.init_node('wp_navi')  # ノードの初期化
-        rospy.on_shutdown(self.shutdown)  # シャットダウン時の処理
+    def __init__(self), robot_name: 
+        rospy.init_node('wp_navi')
+        rospy.on_shutdown(self.shutdown) 
 
-        rospy.Subscriber('button_pushed', Bool, self.button_pushed)
-
-        # アクションクライアントの生成
         self.ac = actionlib.SimpleActionClient('robot1/move_base', MoveBaseAction)
-        # アクションサーバーが起動するまで待つ。引数はタイムアウトの時間(秒）
+
         while not self.ac.wait_for_server(rospy.Duration(5)):
             rospy.loginfo("Waiting for the move_base action server to come up")
 
