@@ -4,8 +4,8 @@
 import rospy
 
 import actionlib
-from actionlib_msgs.msg import *
-from geometry_msgs.msg import Pose, PoseWithCovarianceStamped, Point, Quaternion, Twist
+from actionlib_msgs.msg import GoalStatusArray
+from geometry_msgs.msg import Pose, PoseStamped, Point, Quaternion
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
 from waypoint import Waypoint
