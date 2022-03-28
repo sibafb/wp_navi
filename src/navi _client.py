@@ -45,6 +45,9 @@ class NavigationClient():
         self.navClient.cancel_goal()
         
     def cb_status(self, status):
+        '''
+        http://wiki.ros.org/actionlib/DetailedDescription
+        '''
 
         if self.__goal_status != status.status_list[-1].status :
             self.__goal_status = status.status_list[-1].status
