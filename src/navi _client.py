@@ -32,17 +32,17 @@ class NavigationClient():
         wp_pose = waypoint.ToPose()
 
         goal = MoveBaseGoal()
-        goal.target_pose.header.frame_id = self.goal_frame
+        goal.target_pose.header.frame_id = self.__goal_frame
         goal.target_pose.header.stamp = rospy.Time.now()
         
         goal.target_pose.pose.position = wp_pose.position
         goal.target_pose.pose.orientation = wp_pose.orientation
 
-        self.navClient.send_goal(goal)
+        self.__navClient.send_goal(goal)
     
     def cancel_goal(self):
 
-        self.navClient.cancel_goal()
+        self.__navClient.cancel_goal()
         
     def cb_status(self, status):
         '''
