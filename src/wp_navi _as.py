@@ -27,11 +27,12 @@ class WpNavi():
         self.nav_client = NavigationClient()
         self.waypoints = Waypoints()
 
-        # [x,y,theta]
-        self.way_point_robot1 = [[ 6.1, 0.8, 0.0 * pi], [6.1, 4.2, 0.5 * pi],
-                     [ 2.7, 4.2, -1.0 * pi], [2.7, 0.8, -0.5 * pi],
-                     [999, 999, 999]]
-   
+        ## resister waypoints
+        self.waypoints.append([ 6.1, 0.8,  0.0 * pi])
+        self.waypoints.append([ 6.1, 4.2,  0.5 * pi])
+        self.waypoints.append([ 2.7, 4.2, -1.0 * pi])
+        self.waypoints.append([ 2.7, 0.8, -0.5 * pi])
+
     # シャットダウン時の処理
     def shutdown(self):
         rospy.loginfo("The robot was terminated")
