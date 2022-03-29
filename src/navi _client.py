@@ -29,7 +29,7 @@ class NavigationClient():
 
     def send_goal(self, waypoint):
 
-        wp_pose = waypoint.ToPose()
+        wp_pose = waypoint.toPose()
 
         goal = MoveBaseGoal()
         goal.target_pose.header.frame_id = self.__goal_frame
