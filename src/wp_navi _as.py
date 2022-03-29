@@ -14,21 +14,18 @@ from Wpnav.msg import WpnavAction
 from Wpnav.msg import WpnavResult
 from Wpnav.msg import WpnavFeedback
 
+from waypoint import Waypoint
+
+from waypoints import Waypoints
+from naviclient import NavigationClient
+
 class WpNavi():
     def __init__(self, robot_name = ""): 
         rospy.init_node('wp_navi')
         rospy.on_shutdown(self.shutdown) 
 
-        self.ac = actionlib.SimpleActionClient( robot_name + '/move_base', MoveBaseAction)
-
-        while not self.ac.wait_for_server(rospy.Duration(5)):
-            rospy.loginfo("Waiting for the move_base action server to come up")
-
-        rospy.loginfo("The servers comes up")
-
-        self.goal = MoveBaseGoal()
-        self.goal.target_pose.header.frame_id = 'map'
-        self.goal.target_pose.header.stamp = rospy.Time.now() 
+        self.nav_client = NavigationClient()
+        self.waypoints = Waypoints()
 
         # [x,y,theta]
         self.way_point_robot1 = [[ 6.1, 0.8, 0.0 * pi], [6.1, 4.2, 0.5 * pi],
