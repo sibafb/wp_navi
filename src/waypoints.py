@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# import this 
-import sys
-sys.path.append(‘../’)
-
 from collections import deque
 
 from waypoint import Waypoint
