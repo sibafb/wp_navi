@@ -39,8 +39,10 @@ class NavigationClient():
 
         self.__navClient.send_goal(goal)
     
-    def cancel_goal(self):
+    def wait_for_result(self):
+        self.__navClient.wait_for_result()
 
+    def cancel_goal(self):
         self.__navClient.cancel_goal()
         
     def cb_status(self, status):
