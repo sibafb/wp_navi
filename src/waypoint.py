@@ -3,6 +3,9 @@
 
 from enum import ENUM
 
+from geometry_msgs.msg import Pose,Quaternion
+import tf
+
 class WaypointType(ENUM):
     Coordinate_Point_As_List = auto()
 
@@ -17,5 +20,19 @@ class Waypoint():
         self.y = pos_y
         self.theta = pos_theta
         self.Type = WaypointType.Coordinate_Point_As_List
+
     def toList(self):
         return [self.x, self.y, self.theta]
+
+    def toPose(self):
+
+        pose = Pose()
+
+        pose.position.x = self.x
+        pose.position.y = self.y
+        pose.position.z = 0
+
+        q = tf.transformations.quaternion_from_euler(0, 0, self.theta)
+        pose.orientation = Quaternion(q[0], q[1], q[2], q[3])
+
+        return pose
