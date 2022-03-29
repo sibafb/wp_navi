@@ -24,19 +24,19 @@ class WpNavi():
         rospy.init_node('wp_navi')
         rospy.on_shutdown(self.shutdown) 
 
-        self._nav_client = NavigationClient()
-        self._waypoints = Waypoints()
+        self.__nav_client = NavigationClient()
+        self.__waypoints = Waypoints()
 
         ## resister waypoints
-        self._waypoints.append([ 6.1, 0.8,  0.0 * pi])
-        self._waypoints.append([ 6.1, 4.2,  0.5 * pi])
-        self._waypoints.append([ 2.7, 4.2, -1.0 * pi])
-        self._waypoints.append([ 2.7, 0.8, -0.5 * pi])
+        self.__waypoints.append([ 6.1, 0.8,  0.0 * pi])
+        self.__waypoints.append([ 6.1, 4.2,  0.5 * pi])
+        self.__waypoints.append([ 2.7, 4.2, -1.0 * pi])
+        self.__waypoints.append([ 2.7, 0.8, -0.5 * pi])
 
     # シャットダウン時の処理
     def shutdown(self):
         rospy.loginfo("The robot was terminated")
-        self.ac.cancel_goal()
+        self.__nav_client.cancel_goal()
 
 
 if __name__ == '__main__':
