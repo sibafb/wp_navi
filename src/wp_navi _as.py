@@ -33,6 +33,13 @@ class WpNavi():
         self.__waypoints.append([ 2.7, 4.2, -1.0 * pi])
         self.__waypoints.append([ 2.7, 0.8, -0.5 * pi])
 
+        self._action_server = actionlib.SimpleActionServer( 'wp_navigation_action', WpnavAction, execute_cb = self.wp_navigation, auto_start = False )
+
+        self._action_server.start()
+
+    def wp_navigation(self):
+        pass
+
     # シャットダウン時の処理
     def shutdown(self):
         rospy.loginfo("The robot was terminated")
