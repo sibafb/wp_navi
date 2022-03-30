@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from enum import ENUM
-
 from geometry_msgs.msg import Pose,Quaternion
 import tf
 
@@ -32,3 +30,6 @@ class Waypoint():
         pose.orientation = Quaternion(q[0], q[1], q[2], q[3])
 
         return pose
+
+    def __str__(self):
+        return "["+str(self.label)+", "+str(self.x)+", "+str(self.y)+", "+str(self.theta)+"]"
