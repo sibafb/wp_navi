@@ -16,13 +16,13 @@ class NavigationClient():
         self.__goal_status = GoalStatus.PENDING
 
         ### Action client 
-        self.__navClient = actionlib.SimpleActionClient( robot_name + '/move_base', MoveBaseAction)
+        self.__navClient = actionlib.SimpleActionClient( robot_name + '/move_base', MoveBaseAction )
 
         while not self.__navClient.wait_for_server(rospy.Duration(30)):
             rospy.loginfo("Waiting for the move_base action server to come up")
 
         ### Subscliber
-        self.__navStatus = rospy.Subscliber( robot_name + '/move_base/status', GoalStatusArray, self.cb_status)
+        self.__navStatus = rospy.Subscliber( robot_name + '/move_base/status', GoalStatusArray, self.cb_status )
 
         rospy.loginfo("The servers comes up")
 
