@@ -38,7 +38,14 @@ class WpNavi():
         self._action_server.start()
 
     def wp_navigation(self):
-        pass
+        r = rospy.Rate( 1.0 ) 
+
+        for waypoint in self.__waypoints:
+
+            r.sleep()
+
+        result = WpnavResult()
+        self._action_server.set_succeeded( result )
 
     # シャットダウン時の処理
     def shutdown(self):
