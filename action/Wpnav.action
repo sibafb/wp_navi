@@ -4,3 +4,4 @@ int32 wp_loop
 bool finished_navigation
 ---
 int32 next_wp_index
+string next_wp_label
