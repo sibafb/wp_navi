@@ -2,15 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import rospy
-import tf
 import actionlib
 from actionlib_msgs.msg import *
-from geometry_msgs.msg import Pose, PoseWithCovarianceStamped, Point, Quaternion, Twist
-from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-from std_msgs.msg import Bool
+
 from math import pi
 
-from Wpnav.msg import WpnavAction, WpnavResult, WpnavFeedback
+from wp_navi import WpnavAction, WpnavResult, WpnavFeedback
 
 from waypoint import Waypoint
 
