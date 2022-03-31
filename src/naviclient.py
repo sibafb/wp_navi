@@ -5,11 +5,14 @@ import rospy
 
 import actionlib
 from actionlib_msgs.msg import GoalStatus, GoalStatusArray
-from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
+from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal,MoveBaseActionFeedback,MoveBaseActionResult
 
 from waypoint import Waypoint
 
 class NavigationClient():
+    """
+    based on http://wiki.ros.org/move_base
+    """
     def __init__(self, goal_frame = 'map',robot_name = ''): 
 
         self.__goal_frame = goal_frame
@@ -23,6 +26,8 @@ class NavigationClient():
 
         ### Subscliber
         self.__navStatus = rospy.Subscliber( robot_name + '/move_base/status', GoalStatusArray, self.cb_status )
+        self.__navFeedback = rospy.Subscliber( robot_name + '/move_base/feedback', MoveBaseActionFeedback, self.cb_feedback )
+        self.__navResult = rospy.Subscliber( robot_name + '/move_base/result', MoveBaseActionResult, self.cb_result )
 
         rospy.loginfo("The servers comes up")
 
@@ -34,7 +39,7 @@ class NavigationClient():
         goal.target_pose.header.frame_id = self.__goal_frame
         goal.target_pose.header.stamp = rospy.Time.now()
         
-        goal.target_pose.pose.position = wp_pose.position
+        goal.target_pose.pose.position    = wp_pose.position
         goal.target_pose.pose.orientation = wp_pose.orientation
 
         self.__navClient.send_goal(goal)
@@ -42,9 +47,22 @@ class NavigationClient():
     def wait_for_result(self):
         self.__navClient.wait_for_result()
 
+    def is_reached_goal(self):
+        
+        if self.__goal_status == GoalStatus.SUCCEEDED:
+            return True
+
+        return False
+
     def cancel_goal(self):
         self.__navClient.cancel_goal()
-        
+
+    def cb_result(self, result):
+        pass
+
+    def cb_feedback(self, feedback):
+        pass
+
     def cb_status(self, status):
         '''
         http://wiki.ros.org/actionlib/DetailedDescription
