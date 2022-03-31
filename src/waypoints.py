@@ -49,6 +49,9 @@ class Waypoints():
     def index(self):
         return self._idx
 
+    def next_label(self):
+        return self.waypoints[self._idx].labelStr()
+
     def __str__(self):
         return str(self.waypoints)
 
