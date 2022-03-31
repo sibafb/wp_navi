@@ -24,12 +24,13 @@ class NavigationClient():
         while not self.__navClient.wait_for_server(rospy.Duration(30)):
             rospy.loginfo("Waiting for the move_base action server to come up")
 
+        rospy.loginfo("The "+str(robot_name)+" move_base servers comes up")
+
         ### Subscliber
         self.__navStatus = rospy.Subscliber( robot_name + '/move_base/status', GoalStatusArray, self.cb_status )
         self.__navFeedback = rospy.Subscliber( robot_name + '/move_base/feedback', MoveBaseActionFeedback, self.cb_feedback )
         self.__navResult = rospy.Subscliber( robot_name + '/move_base/result', MoveBaseActionResult, self.cb_result )
 
-        rospy.loginfo("The servers comes up")
 
     def send_goal(self, waypoint):
 
@@ -48,7 +49,7 @@ class NavigationClient():
         self.__navClient.wait_for_result()
 
     def is_reached_goal(self):
-        
+
         if self.__goal_status == GoalStatus.SUCCEEDED:
             return True
 
