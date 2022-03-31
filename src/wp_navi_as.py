@@ -41,7 +41,7 @@ class WpNavi():
             self.__nav_client.send_goal(waypoint)
 
             while self.__nav_client.is_reached_goal() == False:
-                
+
                 feedback = WpnavFeedback( next_wp_index = self.__waypoints.index(), next_wp_label = self.__waypoints.next_label() )
                 self._action_server.publish_feedback(feedback)
                 rate.sleep()
@@ -55,7 +55,7 @@ class WpNavi():
 
 if __name__ == '__main__':
     try:
-        WpNavi()
+        WpNavi("create1")
         while not rospy.is_shutdown():
             rospy.spin()
             delay(5)
