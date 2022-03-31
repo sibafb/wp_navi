@@ -10,9 +10,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from std_msgs.msg import Bool
 from math import pi
 
-from Wpnav.msg import WpnavAction
-from Wpnav.msg import WpnavResult
-from Wpnav.msg import WpnavFeedback
+from Wpnav.msg import WpnavAction, WpnavResult, WpnavFeedback
 
 from waypoint import Waypoint
 
@@ -38,20 +36,23 @@ class WpNavi():
         self._action_server.start()
 
     def wp_navigation(self):
-        r = rospy.Rate( 1.0 ) 
+
+        rate = rospy.Rate( 1.0 ) 
 
         for waypoint in self.__waypoints:
 
-            r.sleep()
+            self.__nav_client.send_goal(waypoint)
+
+            while self.__nav_client.is_reached_goal() == False:
+                feedback = WpnavFeedback( next_wp_index = self.__waypoints.index() )
+                rate.sleep()
 
         result = WpnavResult()
         self._action_server.set_succeeded( result )
 
-    # シャットダウン時の処理
     def shutdown(self):
         rospy.loginfo("The robot was terminated")
         self.__nav_client.cancel_goal()
-
 
 if __name__ == '__main__':
     try:
