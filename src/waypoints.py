@@ -39,12 +39,15 @@ class Waypoints():
         return self
 
     def next(self):
-        rospy.loginfo("next")
+
         if self._idx == len(self.waypoints):
             raise StopIteration()
         ret = self.waypoints[self._idx]
         self._idx += 1
         return ret
+
+    def index(self):
+        return self._idx
 
     def __str__(self):
         return str(self.waypoints)
