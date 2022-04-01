@@ -21,15 +21,15 @@ class NavigationClient():
         ### Action client 
         self.__navClient = actionlib.SimpleActionClient( robot_name + '/move_base', MoveBaseAction )
 
-        while not self.__navClient.wait_for_server(rospy.Duration(30)):
+        while not self.__navClient.wait_for_server(rospy.Duration(10)):
             rospy.loginfo("Waiting for the move_base action server to come up")
 
         rospy.loginfo("The "+str(robot_name)+" move_base servers comes up")
 
         ### Subscliber
-        self.__navStatus = rospy.Subscliber( robot_name + '/move_base/status', GoalStatusArray, self.cb_status )
-        self.__navFeedback = rospy.Subscliber( robot_name + '/move_base/feedback', MoveBaseActionFeedback, self.cb_feedback )
-        self.__navResult = rospy.Subscliber( robot_name + '/move_base/result', MoveBaseActionResult, self.cb_result )
+        self.__navStatus = rospy.Subscriber( robot_name + '/move_base/status', GoalStatusArray, self.cb_status )
+        self.__navFeedback = rospy.Subscriber( robot_name + '/move_base/feedback', MoveBaseActionFeedback, self.cb_feedback )
+        self.__navResult = rospy.Subscriber( robot_name + '/move_base/result', MoveBaseActionResult, self.cb_result )
 
 
     def send_goal(self, waypoint):
@@ -68,7 +68,9 @@ class NavigationClient():
         '''
         http://wiki.ros.org/actionlib/DetailedDescription
         '''
-
+        if len(status.status_list) == 0:
+            return
+        
         if self.__goal_status != status.status_list[-1].status :
             self.__goal_status = status.status_list[-1].status
 
