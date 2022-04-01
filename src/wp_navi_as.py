@@ -17,7 +17,7 @@ class WpNavi():
         rospy.init_node('wp_navi')
         rospy.on_shutdown(self.shutdown) 
 
-        self.__nav_client = NavigationClient()
+        self.__nav_client = NavigationClient(robot_name = robot_name)
         self.__waypoints = Waypoints()
 
         ## resister waypoints
@@ -56,6 +56,6 @@ if __name__ == '__main__':
         WpNavi("create1")
         while not rospy.is_shutdown():
             rospy.spin()
-            delay(5)
+            rospy.sleep(0.2)
     except rospy.ROSInterruptException:
         rospy.loginfo("WP navigation finished.")
