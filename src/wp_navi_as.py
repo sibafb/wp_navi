@@ -7,9 +7,7 @@ from actionlib_msgs.msg import *
 
 from math import pi
 
-from wp_navi import WpnavAction, WpnavResult, WpnavFeedback
-
-from waypoint import Waypoint
+from wp_navi.msg import WpnavAction, WpnavResult, WpnavFeedback
 
 from waypoints import Waypoints
 from naviclient import NavigationClient
