@@ -1,5 +1,5 @@
 int32 wp_index
-int32 wp_loop
+bool wp_loop
 ---
 bool finished_navigation
 ---
