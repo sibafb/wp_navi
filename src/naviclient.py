@@ -95,9 +95,6 @@ class NavigationClient():
             elif self.__goal_status == GoalStatus.LOST:
                 pass  
 
-
-        
-
     def shutdown(self):
         rospy.loginfo("The robot was terminated")
         self.ac.cancel_goal() 
