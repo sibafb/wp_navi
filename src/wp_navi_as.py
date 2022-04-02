@@ -20,15 +20,15 @@ class WpNavi():
         self.__nav_client = NavigationClient(robot_name = robot_name)
         self.__waypoints = Waypoints()
 
-        ## resister waypoints
-        self.__waypoints.append([ 6.1, 0.8,  0.0 * pi])
-        self.__waypoints.append([ 6.1, 4.2,  0.5 * pi])
-        self.__waypoints.append([ 2.7, 4.2, -1.0 * pi])
-        self.__waypoints.append([ 2.7, 0.8, -0.5 * pi])
-
         self._action_server = actionlib.SimpleActionServer( 'wp_navigation_action', WpnavAction, execute_cb = self.wp_navigation, auto_start = False )
 
         self._action_server.start()
+
+    def add_waypoint(self, waypoint):
+        rospy.loginfo('add waypoint')
+        self.__waypoints.append(waypoint)
+
+        rospy.loginfo('waypoint num is now :' + len(self.__waypoints))
 
     def wp_navigation(self):
 
@@ -53,7 +53,13 @@ class WpNavi():
 
 if __name__ == '__main__':
     try:
-        WpNavi("create1")
+        wp = WpNavi("create1")
+
+        wp.add_waypoint(Waypoint("first", 6.1, 0.8,  0.0 * pi))
+        wp.add_waypoint(Waypoint("second", 6.1, 4.2,  0.5 * pi))
+        wp.add_waypoint(Waypoint("third", 2.7, 4.2, -1.0 * pi))
+        wp.add_waypoint(Waypoint("fourth", 2.7, 0.8, -0.5 * pi))
+
         while not rospy.is_shutdown():
             rospy.spin()
             rospy.sleep(0.2)
