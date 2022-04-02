@@ -29,7 +29,7 @@ class WpNavi():
         rospy.loginfo('add waypoint')
         self.__waypoints.append(waypoint)
 
-        rospy.loginfo('waypoint num is now :' + len(self.__waypoints))
+        rospy.loginfo('waypoint num is now :' + str(len(self.__waypoints)))
 
     def wp_navigation(self):
 
