@@ -49,9 +49,6 @@ class Waypoints():
     def index(self):
         return self._idx
 
-    def num(self):
-        return len(self.waypoints)
-
     def next_label(self):
         return self.waypoints[self._idx].labelStr()
 
@@ -59,7 +56,7 @@ class Waypoints():
         return str(self.waypoints)
 
     def __len__(self):
-        return str(self.waypoints)
+        return len(self.waypoints)
 
 from math import pi
 import rospy
