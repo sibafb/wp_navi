@@ -31,7 +31,7 @@ class WpNavi():
 
         rospy.loginfo('waypoint num is now :' + str(len(self.__waypoints)))
 
-    def wp_navigation(self):
+    def wp_navigation(self, req):
 
         rate = rospy.Rate( 1.0 ) 
 
