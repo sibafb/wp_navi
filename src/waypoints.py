@@ -49,10 +49,16 @@ class Waypoints():
     def index(self):
         return self._idx
 
+    def num(self):
+        return len(self.waypoints)
+
     def next_label(self):
         return self.waypoints[self._idx].labelStr()
 
     def __str__(self):
+        return str(self.waypoints)
+
+    def __len__(self):
         return str(self.waypoints)
 
 from math import pi
