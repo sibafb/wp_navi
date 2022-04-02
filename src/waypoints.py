@@ -65,12 +65,12 @@ if __name__ == '__main__':
 
     rospy.init_node('waypiubts', anonymous=True)
 
-    rospy.loginfo("hello")
+    rospy.loginfo("for test")
 
     wp = Waypoints()
-    wp.append(Waypoint("first", 6.1, 0.8,  0.0 * pi))
+    wp.append(Waypoint("first",  6.1, 0.8,  0.0 * pi))
     wp.append(Waypoint("second", 6.1, 4.2,  0.5 * pi))
-    wp.append(Waypoint("third", 2.7, 4.2, -1.0 * pi))
+    wp.append(Waypoint("third",  2.7, 4.2, -1.0 * pi))
     wp.append(Waypoint("fourth", 2.7, 0.8, -0.5 * pi))
 
     for p in wp:
