@@ -9,6 +9,7 @@ from math import pi
 
 from wp_navi.msg import WpnavAction, WpnavResult, WpnavFeedback
 
+from waypoint import Waypoint
 from waypoints import Waypoints
 from naviclient import NavigationClient
 
