@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="wp_navi" type="waypoints.py" name="waypoints"
+            output="screen"> </node>
+</launch>
